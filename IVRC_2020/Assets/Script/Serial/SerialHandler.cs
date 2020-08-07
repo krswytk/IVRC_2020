@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.IO.Ports;
+using System.IO.Ports;//以下3URLはNET4.0環境において、.2.0の機能を使用するために使用した参照サイト、DLサイト、公式マイクロサイトである。
+//https://qiita.com/Fox_Kei/items/dbe10141e36f6a91ee83
+//https://www.nuget.org/packages/System.IO.Ports/4.7.0
+//https://docs.microsoft.com/ja-jp/visualstudio/cross-platform/unity-scripting-upgrade?view=vs-2019#taking-advantage-of-net-compatibility
 using System.Threading;
 
 public class SerialHandler : MonoBehaviour
