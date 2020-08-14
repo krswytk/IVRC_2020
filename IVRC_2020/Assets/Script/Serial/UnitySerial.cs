@@ -20,8 +20,9 @@ public class UnitySerial : MonoBehaviour
     //受信した信号(message)に対する処理
     void OnDataReceived(string message)
     {
-        string[] data = message.Split( new string[] { "\t" }, System.StringSplitOptions.None);//\tを除外してdateに格納
-        if (data.Length < 2) return;
+        string[] data = message.Split( new string[] { "," }, System.StringSplitOptions.None);//\tを除外してdateに格納
+        if (data.Length < 1) return;
+        Debug.Log(message);
 
         try
         {
