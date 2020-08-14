@@ -9,27 +9,26 @@ public class UnitySerial : MonoBehaviour
 
     private bool[] s;
     [SerializeField] private int number = 4;
-    
-  void Start()
+    public bool oneS;
+
+    void Start()
     {
         //信号を受信したときに、そのメッセージの処理を行う
         serialHandler.OnDataReceived += OnDataReceived;
         s = new bool[number];
+        oneS = false;
     }
     
     //受信した信号(message)に対する処理
     void OnDataReceived(string message)
     {
         string[] data = message.Split( new string[] { "," }, System.StringSplitOptions.None);//\tを除外してdateに格納
-        if (data.Length < 1) return;
+        if (data.Length < 2) return;
         Debug.Log(message);
 
         try
         {
-            Debug.Log(message + "+" + data[0]);
-
-
-            for(int i = 0; i < data.Length; i++)
+            for (int i = 0; i < data.Length; i++)
             {
                 if (data[i] == "1")
                 {
@@ -37,13 +36,24 @@ public class UnitySerial : MonoBehaviour
                 }
                 else if (data[i] == "0")
                 {
-                    s[i] = false;
+                    //s[i] = false;//データ更新しなければOK
                 }
                 else
                 {
                     Debug.LogError("シリアル通信で送られてくるデータに誤りがあります。\nThere is an error in the data sent by serial communication.");
                 }
             }
+
+
+            for (int i = 0; i < data.Length; i++)
+            {
+                oneS = false;
+                if(s[i] == false)
+                {
+                    break;
+                }
+                oneS = true;
+            }//最終的にすべてtrueならoneSはtrueになる
         }
         catch (System.Exception e)
         {
