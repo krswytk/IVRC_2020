@@ -24,17 +24,17 @@ public class UnitySerial : MonoBehaviour
     {
         string[] data = message.Split( new string[] { "," }, System.StringSplitOptions.None);//\tを除外してdateに格納
         if (data.Length < 2) return;
-        Debug.Log(message);
+        //Debug.Log(message);
 
         try
         {
             for (int i = 0; i < data.Length; i++)
             {
-                if (data[i] == "1")
+                if (data[i] == "0")//押された
                 {
                     s[i] = true;
                 }
-                else if (data[i] == "0")
+                else if (data[i] == "1")
                 {
                     //s[i] = false;//データ更新しなければOK
                 }
@@ -53,7 +53,19 @@ public class UnitySerial : MonoBehaviour
                     break;
                 }
                 oneS = true;
+
             }//最終的にすべてtrueならoneSはtrueになる
+
+
+
+            if (oneS == true)
+            {
+                Debug.Log("1週を検知");
+                for (int i = 0; i < data.Length; i++)
+                {
+                    s[i] = false;
+                }
+            }
         }
         catch (System.Exception e)
         {
